@@ -40,7 +40,11 @@ const userSchema = new mongoose.Schema({
   profileImage: {
     type: String,
     default: ""
-  }
+  },
+  verifiedSubjects:[
+  {
+    type: String,
+  }],
 
 }, { timestamps: true });
 

@@ -14,6 +14,11 @@ const authRoutes = require("./routes/authRoutes");
 const progressRoutes = require("./routes/progress");
 const answersRoutes = require("./routes/answers");
 const questionsRoutes = require("./routes/questions");
+const testRoutes = require("./routes/tests");
+const communityRoutes = require("./routes/community");
+// const communityQuestionRoutes = require("./routes/communityQuestion");
+const adminConfigRoutes = require("./routes/adminConfigRoutes");  
+const uploadRoutes = require("./routes/uploadRoutes");
 
 dotenv.config();
 connectDB();
@@ -38,6 +43,14 @@ app.use("/api/courses", courseRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/answers", answersRoutes);
 app.use("/api/questions", questionsRoutes);
+app.use("/api/tests", testRoutes);
+app.use("/api/community", communityRoutes);
+
+app.use("/api/admin", adminConfigRoutes);
+app.use("/api/upload", uploadRoutes);
+
+
+// app.use("/api/community/questions", communityQuestionRoutes);
 
 // ==============================
 // 📌 STATIC FILES

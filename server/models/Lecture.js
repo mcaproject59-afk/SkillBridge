@@ -9,7 +9,8 @@ const lectureSchema = new mongoose.Schema({
   title: String,
   videoUrl: String,
   description: String,   // ✅ ADD THIS
-  duration: Number       // optional (seconds)
+  duration: Number,
+  liveUrl: String     // optional (seconds)
 }, { timestamps: true });
 
 module.exports = mongoose.model("Lecture", lectureSchema);

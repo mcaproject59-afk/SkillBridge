@@ -1,56 +1,82 @@
 const mongoose = require("mongoose");
 
+// ==============================
+// 📌 VIDEO SCHEMA
+// ==============================
+const videoSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    videoUrl: { type: String, required: true },
+    likes:{
+      type: Number,
+      default: 0
+    },
+  },
+  { timestamps: true }
+);
+
+// ==============================
+// 📌 PDF SCHEMA
+// ==============================
+const pdfSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    pdfUrl: { type: String, required: true },
+    likes:{
+      type: Number,
+      default: 0
+    },
+  },
+  { timestamps: true }
+);
+
+// ==============================
+// 📌 LIVE CLASS SCHEMA
+// ==============================
+const liveSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    link: { type: String, required: true },
+    scheduledAt: { type: Date },
+  },
+  { timestamps: true }
+);
+
+// ==============================
+// 📌 COURSE SCHEMA
+// ==============================
 const courseSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true
-    },
+    title: { type: String, required: true },
 
-    description: {
-      type: String
-    },
+    description: String,
 
-    subject: {
-      type: String
-    },
+    subject: String,
 
     level: {
       type: String,
-      enum: ["Beginner", "Intermediate", "Advanced"]
+      enum: ["Beginner", "Intermediate", "Advanced"],
+      required: true,
     },
 
-    teacherId: {
+    // 👇 REAL TEACHER LINK
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      required: true,
     },
 
-    creditsRequired: {
-      type: Number,
-      default: 0
+    // 📌 CONTENT STRUCTURE
+    videos: [videoSchema],
+    pdfs: [pdfSchema],
+    liveClasses: [liveSchema],
+
+    // 📌 APPROVAL SYSTEM
+    status: {
+      type: String,
+      enum: ["draft", "pending", "approved", "rejected"],
+      default: "draft",
     },
-
-    resources: [
-      {
-        type: {
-          type: String // video / pdf
-        },
-        title: String,
-        url: String
-      }
-    ],
-
-    studentsEnrolled: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      }
-    ],
-
-    averageRating: {
-      type: Number,
-      default: 0
-    }
   },
   { timestamps: true }
 );
